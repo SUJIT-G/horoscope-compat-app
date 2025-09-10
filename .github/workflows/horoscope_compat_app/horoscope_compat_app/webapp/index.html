@@ -1,0 +1,58 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Horoscope & Compatibility</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width:900px; margin:20px auto; padding:10px; }
+    .card{ border:1px solid #ddd; padding:12px; margin:10px 0; border-radius:8px; }
+    label{ display:block; margin-top:8px; }
+    input, select { padding:8px; width:100%; box-sizing:border-box; }
+    button{ padding:10px 14px; margin-top:10px; }
+    #result { margin-top:12px; white-space:pre-wrap; }
+    .ad { background:#f2f2f2; padding:10px; text-align:center; color:#666; border-radius:6px; margin:8px 0; }
+  </style>
+</head>
+<body>
+  <h1>Horoscope & Love Compatibility</h1>
+
+  <!-- Top banner ad placeholder: replace with Monetag / Adsterra code -->
+  <div id="ad-top" class="ad">Top Banner Ad — Replace with Monetag/Adsterra snippet</div>
+
+  <div class="card">
+    <h3>Get Today's Horoscope</h3>
+    <label for="zodiac">Choose your sign</label>
+    <select id="zodiac">
+      <option value="aries">Aries</option><option value="taurus">Taurus</option><option value="gemini">Gemini</option>
+      <option value="cancer">Cancer</option><option value="leo">Leo</option><option value="virgo">Virgo</option>
+      <option value="libra">Libra</option><option value="scorpio">Scorpio</option><option value="sagittarius">Sagittarius</option>
+      <option value="capricorn">Capricorn</option><option value="aquarius">Aquarius</option><option value="pisces">Pisces</option>
+    </select>
+    <button id="getHoroscope">Get Horoscope</button>
+    <div id="horoscopeResult" class="result"></div>
+  </div>
+
+  <div class="card">
+    <h3>Love Compatibility Checker</h3>
+    <label>Your Name</label><input id="name1" placeholder="Your name" />
+    <label>Your DOB (YYYY-MM-DD)</label><input id="dob1" placeholder="1990-01-30" />
+    <label>Partner Name</label><input id="name2" placeholder="Partner name" />
+    <label>Partner DOB (YYYY-MM-DD)</label><input id="dob2" placeholder="1992-05-12" />
+    <button id="checkCompat">Check Compatibility</button>
+    <div id="compatResult" class="result"></div>
+  </div>
+
+  <!-- Native ad placeholder inside content -->
+  <div id="ad-native" class="ad">Native Ad Placeholder — Replace with ad code</div>
+
+  <div class="card">
+    <h3>Share & Grow</h3>
+    <p>Share your result with friends. Useful for viral growth.</p>
+    <button id="shareBtn">Share Link</button>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
