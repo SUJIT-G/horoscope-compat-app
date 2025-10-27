@@ -23,5 +23,6 @@ It is intentionally minimal so beginners can run and deploy quickly.
 
 ## Telegram
 ```
-{"inline_keyboard":[[{"text":"Open Horoscope App","web_app":{"url":"https://yourdomain.com/webapp"}}]]}
+{"inline_keyboard":[[{"text":"Open Horoscope App","https://horoscope-love-compat/netlify.app":{"url":"https://horoscope-love-compat/netlify.app"}}]]}
 ```
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ef1a3c0e-2ede-49c1-98d3-15253551f24d/deploy-status)](https://app.netlify.com/projects/horoscope-love-compat/deploys)
