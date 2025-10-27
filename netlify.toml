@@ -1,10 +1,18 @@
 [build]
-  command = "npm run build"
-  publish = "dist"
+  # No build step in this repo by default — keep this tolerant so Netlify deploys the static webapp folder.
+  command = "npm run build || true"
+  publish = "webapp"
   functions = "netlify/functions"
   environment = { NODE_VERSION = "18" }
 
+# Send any /api/* requests to the single Netlify function handler (server)
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/server/:splat"
+  status = 200
+
+# SPA fallback for client-side routing (if needed). Keep this after API redirect.
 [[redirects]]
   from = "/*"
-  to = "/.netlify/functions/server"
+  to = "/index.html"
   status = 200
