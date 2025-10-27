@@ -1,4 +1,3 @@
-
 const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
@@ -9,7 +8,14 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
 
-const HOROSCOPE = JSON.parse(fs.readFileSync(path.join(__dirname, 'horoscope.json')));
+let HOROSCOPE = {};
+try {
+  const data = fs.readFileSync(path.join(__dirname, 'horoscope.json'), 'utf8');
+  HOROSCOPE = JSON.parse(data);
+} catch (err) {
+  console.error('Failed to read/parse horoscope.json:', err.message);
+  // Keep HOROSCOPE as empty object so endpoints can still run and return sensible errors.
+}
 
 // helper: zodiac from YYYY-MM-DD (or Date string)
 function zodiacFromDOB(dobStr) {
@@ -36,7 +42,7 @@ function zodiacFromDOB(dobStr) {
 app.get('/api/horoscope/:zodiac', (req, res) => {
   const z = req.params.zodiac.toLowerCase();
   const list = HOROSCOPE[z];
-  if (!list) return res.status(404).json({ error: 'Unknown zodiac' });
+  if (!list) return res.status(404).json({ error: 'Unknown zodiac or missing horoscope data' });
   const today = new Date();
   const idx = Math.floor((today.getFullYear() * 10000 + (today.getMonth()+1)*100 + today.getDate()) % list.length);
   res.json({ zodiac: z, horoscope: list[idx], date: today.toISOString().slice(0,10) });
@@ -50,6 +56,10 @@ app.post('/api/compatibility', (req, res) => {
   }
   const z1 = zodiacFromDOB(dob1);
   const z2 = zodiacFromDOB(dob2);
+  if (!z1 || !z2) {
+    return res.status(400).json({ error: 'Invalid date(s) of birth; unable to determine zodiac sign' });
+  }
+
   function scoreSeed(a, b) {
     let s = 0;
     (a + '|' + b).split('').forEach(c => s += c.charCodeAt(0));
@@ -63,8 +73,8 @@ app.post('/api/compatibility', (req, res) => {
   else message = 'Challenging match — requires patience and compromise.';
 
   res.json({
-    name1, dob1, zodiac1: z1 || 'unknown',
-    name2, dob2, zodiac2: z2 || 'unknown',
+    name1, dob1, zodiac1: z1,
+    name2, dob2, zodiac2: z2,
     score, message
   });
 });
@@ -76,8 +86,6 @@ app.get('/', (req, res) => {
   res.send('Horoscope + Compatibility Mini App API is running. Open /webapp for the frontend.');
 });
 
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`✅ Server running on port ${PORT}`);
 });
-
