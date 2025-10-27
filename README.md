@@ -22,10 +22,6 @@ It is intentionally minimal so beginners can run and deploy quickly.
 - Place your Monetag / Adsterra ad snippets into `webapp/index.html` where indicated.
 
 ## Telegram
-- Create a bot with BotFather and use an InlineKeyboard Web App button to open `https://yourdomain.com/webapp`
-- Example reply_markup:
 ```
 {"inline_keyboard":[[{"text":"Open Horoscope App","web_app":{"url":"https://yourdomain.com/webapp"}}]]}
 ```
-
-If you want, I can create a step-by-step GitHub push + Railway/Vercel deploy guide next.
